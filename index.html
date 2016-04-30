@@ -1,0 +1,50 @@
+<html ng-app="thisApp">
+<head>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/app.css">
+	<script type="text/javascript" src="angular.min.js"></script>
+	<script type="text/javascript" src="controller/app.js"></script>
+	<script type="text/javascript" src="bootstrap.min.js"></script>
+</head>
+<body style="padding: 50px">
+	<div ng-controller="AlbumListController">
+		<p><input placeholder="Type to search...." type="text" ng-model="searchFor" size="30"/></p>
+		<p>
+			There are {{ albums.length }} albums available to view:
+		</p>
+		<div class=" album panel panel-primary" ng-repeat="album in albums |filter:{name:searchFor} | orderBy:'date'">
+			<div class="panel-heading"> 
+				<div style="float: right"> {{album.date}} </div>
+				{{album.name}} 
+			</div>
+			<div class="description">
+				{{album.desc}}
+			</div>	
+		</div>
+
+
+	<div style="clear:left"></div>
+	<h3> Add New Album </h3>
+	<div class="album panel panel-default">
+		<div class="panel-heading">
+			<div style="float: right">
+				<input type="text" placeholder="yyyy..." size="5" ng-model="adding_album.date"/>
+			</div>
+			<input type="text" placeholder="Title..." size="20" ng-model="adding_album.title"/>
+		</div>
+		<div class="description">
+			<p>
+				<textarea ng-model="adding_album.desc" placeholder="Description..." rows="4" style="width:100%"></textarea>
+			</p>
+		
+			<p>
+				<input type="text" ng-model="adding_album.name" style="width: 100%"/>
+			</p>
+			<p>
+				<button ng-click= "addAlbum(adding_album)" type="button" class="btn btn-success"> Add New Album </button>
+			</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>
